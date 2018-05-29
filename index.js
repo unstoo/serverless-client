@@ -94,6 +94,7 @@ function listMajors() {
     spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
     range: 'Class Data!A2:E',
   }).then(function(response) {
+    debugger
     var range = response.result;
     if (range.values.length > 0) {
       appendPre('Name, Major:');
