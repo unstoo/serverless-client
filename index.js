@@ -2,8 +2,12 @@ console.log("I'm so serverless.");
 
 
 // Client ID and API key from the Developer Console
-var CLIENT_ID = '506245617499-ivq3qssgvmb9g2uuj6rjuo8c3dalu5ss.apps.googleusercontent.com';
-var API_KEY = 'AIzaSyBBYuQFkpgSVmQBsO1K_M7vxuB9YldSS7Y';
+// Spreadsheets
+// var CLIENT_ID = '506245617499-ivq3qssgvmb9g2uuj6rjuo8c3dalu5ss.apps.googleusercontent.com';
+// var API_KEY = 'AIzaSyBBYuQFkpgSVmQBsO1K_M7vxuB9YldSS7Y';
+// Googledrive
+var CLIENT_ID = '505393570683-g5lvolj9hq88ij8p8tlrgnrtp66doong.apps.googleusercontent.com';
+var API_KEY = 'AIzaSyAZXSZ9PBrI4mG9XxSn8wlsuwwoSiH_ezM';
 
 // Array of API discovery doc URLs for APIs used by the quickstart
 var DISCOVERY_DOCS = [ "https://sheets.googleapis.com/$discovery/rest?version=v4" ];
@@ -52,7 +56,7 @@ function updateSigninStatus(isSignedIn) {
   if (isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
-    listMajors();
+    listFiles();
   } else {
     authorizeButton.style.display = 'block';
     signoutButton.style.display = 'none';
@@ -86,27 +90,22 @@ function appendPre(message) {
 }
 
 /**
- * Print the names and majors of students in a sample spreadsheet:
- * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+ * Print files.
  */
-function listMajors() {
-  gapi.client.sheets.spreadsheets.values.get({
-    spreadsheetId: '1tsROLOxhB5U4nh6GDqgPPC76TwKCgV6Qxud4eWt1TUs',
-    range: '2018!A1:B',
+function listFiles() {
+  gapi.client.drive.files.list({
+    'pageSize': 10,
+    'fields': "nextPageToken, files(id, name)"
   }).then(function(response) {
-    debugger
-    var range = response.result;
-    if (range.values.length > 0) {
-      appendPre('Name, Major:');
-      for (i = 0; i < range.values.length; i++) {
-        var row = range.values[i];
-        // Print columns A and E, which correspond to indices 0 and 4.
-        appendPre(row[0] + ', ' + row[4]);
+    appendPre('Files:');
+    var files = response.result.files;
+    if (files && files.length > 0) {
+      for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        appendPre(file.name + ' (' + file.id + ')');
       }
     } else {
-      appendPre('No data found.');
+      appendPre('No files found.');
     }
-  }, function(response) {
-    appendPre('Error: ' + response.result.error.message);
   });
 }
