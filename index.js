@@ -91,8 +91,8 @@ function appendPre(message) {
  */
 function listMajors() {
   gapi.client.sheets.spreadsheets.values.get({
-    spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-    range: 'Class Data!A2:E',
+    spreadsheetId: '1tsROLOxhB5U4nh6GDqgPPC76TwKCgV6Qxud4eWt1TUs',
+    range: 'Class Data!A1:E',
   }).then(function(response) {
     debugger
     var range = response.result;
