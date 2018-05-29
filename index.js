@@ -1,20 +1,37 @@
 console.log("I'm so serverless.");
 
+// -----------
 
 // Client ID and API key from the Developer Console
 // Spreadsheets
 // var CLIENT_ID = '506245617499-ivq3qssgvmb9g2uuj6rjuo8c3dalu5ss.apps.googleusercontent.com';
 // var API_KEY = 'AIzaSyBBYuQFkpgSVmQBsO1K_M7vxuB9YldSS7Y';
+
+// Array of API discovery doc URLs for APIs used by the quickstart
+// var DISCOVERY_DOCS = [ "https://sheets.googleapis.com/$discovery/rest?version=v4" ];
+
+// Authorization scopes required by the API; multiple scopes can be
+// included, separated by spaces.
+// var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+
+
+
+// -----------
+
+
 // Googledrive
 var CLIENT_ID = '505393570683-g5lvolj9hq88ij8p8tlrgnrtp66doong.apps.googleusercontent.com';
 var API_KEY = 'AIzaSyAZXSZ9PBrI4mG9XxSn8wlsuwwoSiH_ezM';
 
 // Array of API discovery doc URLs for APIs used by the quickstart
-var DISCOVERY_DOCS = [ "https://sheets.googleapis.com/$discovery/rest?version=v4" ];
+var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
 
 // Authorization scopes required by the API; multiple scopes can be
 // included, separated by spaces.
-var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+var SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly';
+
+
+// ----------
 
 var authorizeButton = document.getElementById('authorize-button');
 var signoutButton = document.getElementById('signout-button');
